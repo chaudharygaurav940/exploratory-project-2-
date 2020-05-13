@@ -1,0 +1,11 @@
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+NEI$type<- as.factor(NEI$type)
+NEIM<-subset(NEI,fips=="24510")
+png("E:/PLOT3.png",width = 480,height = 480)
+NEIM%>%ggplot(aes(factor(year),Emissions,fill=type)) +geom_bar(stat="identity")+facet_grid(~type)+
+  theme_bw() + guides(fill=FALSE)
+dev.off()
